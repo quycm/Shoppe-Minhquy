@@ -38,10 +38,14 @@ public class ProductCategory extends AbstractAuditingEntity {
     @Column(name = "show_on_home")
     private Integer showOnHome;
 
+    @ManyToOne
+    @JoinColumn(name = "product_product_id", referencedColumnName = "product_id")
+    private Product product;
+
     public ProductCategory() {
     }
 
-    public ProductCategory(String name, String metaTitle, Long parentId, Integer displayOrder, String seoTitle, String metaKeyWords, String metaDescription, Integer status, Integer showOnHome) {
+    public ProductCategory(String name, String metaTitle, Long parentId, Integer displayOrder, String seoTitle, String metaKeyWords, String metaDescription, Integer status, Integer showOnHome, Product product) {
         this.name = name;
         this.metaTitle = metaTitle;
         this.parentId = parentId;
@@ -51,6 +55,7 @@ public class ProductCategory extends AbstractAuditingEntity {
         this.metaDescription = metaDescription;
         this.status = status;
         this.showOnHome = showOnHome;
+        this.product = product;
     }
 
     public Long getProductCategoryId() {
@@ -133,6 +138,14 @@ public class ProductCategory extends AbstractAuditingEntity {
         this.showOnHome = showOnHome;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "ProductCategory{" +
@@ -146,6 +159,7 @@ public class ProductCategory extends AbstractAuditingEntity {
             ", metaDescription='" + metaDescription + '\'' +
             ", status=" + status +
             ", showOnHome=" + showOnHome +
+            ", product=" + product +
             '}';
     }
 }

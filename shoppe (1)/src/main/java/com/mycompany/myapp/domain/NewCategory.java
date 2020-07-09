@@ -39,12 +39,16 @@ public class NewCategory extends AbstractAuditingEntity {
     @Column(name = "show_on_home")
     private Integer showOnHome;
 
+    @ManyToOne
+    @JoinColumn(name = "news_news_id",referencedColumnName = "news_id")
+    private News news;
+
 
 
     public NewCategory() {
     }
 
-    public NewCategory(String name, String metaTitle, Long parentId, Integer displayOrder, String seoTitle, String metaKeyWords, String metaDescription, Integer status, Integer showOnHome) {
+    public NewCategory(String name, String metaTitle, Long parentId, Integer displayOrder, String seoTitle, String metaKeyWords, String metaDescription, Integer status, Integer showOnHome, News news) {
         this.name = name;
         this.metaTitle = metaTitle;
         this.parentId = parentId;
@@ -54,6 +58,7 @@ public class NewCategory extends AbstractAuditingEntity {
         this.metaDescription = metaDescription;
         this.status = status;
         this.showOnHome = showOnHome;
+        this.news = news;
     }
 
     public Long getNewCategoryId() {
@@ -149,6 +154,7 @@ public class NewCategory extends AbstractAuditingEntity {
             ", metaDescription='" + metaDescription + '\'' +
             ", status=" + status +
             ", showOnHome=" + showOnHome +
+            ", news=" + news +
             '}';
     }
 }

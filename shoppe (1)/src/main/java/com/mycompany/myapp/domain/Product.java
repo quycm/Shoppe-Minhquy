@@ -59,10 +59,14 @@ public class Product extends AbstractAuditingEntity {
     @Column(name = "view_count")
     private Integer viewCount;
 
+    @ManyToOne
+    @JoinColumn(name = "order_detail_order_detail_id", referencedColumnName = "order_detail_id")
+    private OderDetail oderDetail;
+
     public Product() {
     }
 
-    public Product(String productCode, String productName, String metaTitle, String description, String productImage, Double price, Double promotionPrice, Byte includeVat, Integer quantity, Long categoryId, String detail, Integer warranty, Integer status, Date topHot, Integer viewCount) {
+    public Product(String productCode, String productName, String metaTitle, String description, String productImage, Double price, Double promotionPrice, Byte includeVat, Integer quantity, Long categoryId, String detail, Integer warranty, Integer status, Date topHot, Integer viewCount, OderDetail oderDetail) {
         this.productCode = productCode;
         this.productName = productName;
         this.metaTitle = metaTitle;
@@ -78,6 +82,7 @@ public class Product extends AbstractAuditingEntity {
         this.status = status;
         this.topHot = topHot;
         this.viewCount = viewCount;
+        this.oderDetail = oderDetail;
     }
 
     public Long getProductId() {
@@ -208,6 +213,14 @@ public class Product extends AbstractAuditingEntity {
         this.viewCount = viewCount;
     }
 
+    public OderDetail getOderDetail() {
+        return oderDetail;
+    }
+
+    public void setOderDetail(OderDetail oderDetail) {
+        this.oderDetail = oderDetail;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -227,6 +240,7 @@ public class Product extends AbstractAuditingEntity {
             ", status=" + status +
             ", topHot=" + topHot +
             ", viewCount=" + viewCount +
+            ", oderDetail=" + oderDetail +
             '}';
     }
 }
