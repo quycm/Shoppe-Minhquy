@@ -4,6 +4,7 @@ package com.mycompany.myapp.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.Instant;
 
 @Entity
 @Table(name = "`product`")
@@ -36,7 +37,7 @@ public class Product extends AbstractAuditingEntity {
     private Double promotionPrice;
 
     @Column(name = "include_vat")
-    private Byte includeVat;
+    private Integer includeVat;
 
     @Column(name = "quantity")
     private Integer quantity;
@@ -54,7 +55,7 @@ public class Product extends AbstractAuditingEntity {
     private Integer status;
 
     @Column(name = "top_hot")
-    private Date topHot;
+    private Instant topHot;
 
     @Column(name = "view_count")
     private Integer viewCount;
@@ -66,7 +67,7 @@ public class Product extends AbstractAuditingEntity {
     public Product() {
     }
 
-    public Product(String productCode, String productName, String metaTitle, String description, String productImage, Double price, Double promotionPrice, Byte includeVat, Integer quantity, Long categoryId, String detail, Integer warranty, Integer status, Date topHot, Integer viewCount, OderDetail oderDetail) {
+    public Product(String productCode, String productName, String metaTitle, String description, String productImage, Double price, Double promotionPrice, Integer includeVat, Integer quantity, Long categoryId, String detail, Integer warranty, Integer status, Instant topHot, Integer viewCount, OderDetail oderDetail) {
         this.productCode = productCode;
         this.productName = productName;
         this.metaTitle = metaTitle;
@@ -149,11 +150,11 @@ public class Product extends AbstractAuditingEntity {
         this.promotionPrice = promotionPrice;
     }
 
-    public Byte getIncludeVat() {
+    public Integer getIncludeVat() {
         return includeVat;
     }
 
-    public void setIncludeVat(Byte includeVat) {
+    public void setIncludeVat(Integer includeVat) {
         this.includeVat = includeVat;
     }
 
@@ -197,11 +198,11 @@ public class Product extends AbstractAuditingEntity {
         this.status = status;
     }
 
-    public Date getTopHot() {
+    public Instant getTopHot() {
         return topHot;
     }
 
-    public void setTopHot(Date topHot) {
+    public void setTopHot(Instant topHot) {
         this.topHot = topHot;
     }
 
