@@ -1,0 +1,122 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <i class="fa fa-align-justify"></i>
+                    <h5 class="card-header-text d-inline-block">Danh sách thời gian biểu</h5>
+                </div>
+                <div class="col-md-6">
+                    <div class="pr-lg-4 text-center text-md-right">
+                        <button mat-raised-button class=" btn btn-dark btn-sm" [routerLink]="['/timesheet', 'new']">Thêm
+                            mới thời gian biểu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-responsive text-center" matSort>
+                <thead class="full-width">
+                <tr>
+                    <th rowspan="2">Stt</th>
+                    <th rowspan="2">ID nhân viên chấm công</th>
+                    <th rowspan="2">Ca chấm công</th>
+                    <th rowspan="2">Thời gian chấm công</th>
+                    <th colspan="3">Vào ca thực tế</th>
+                    <th colspan="3">Tan ca thực tế</th>
+                    <th colspan="3">Giờ giải lao</th>
+                    <th colspan="3">Vào sau giải lao</th>
+                    <th rowspan="2"></th>
+                </tr>
+                <tr>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th>Số phút muộn</th>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th>Số phút sớm</th>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th>Số phút sớm</th>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th>Số phút muộn</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="sortedData?.length <1">
+                <th colspan="17" rowspan="1" class="text-center bg-light text-dark">
+                    <h3>Danh sách thời gian biểu trống</h3>
+                </th>
+                </tbody>
+                <tbody *ngFor="let item of sortedData; let i = index">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{item?.userIdTk}}</td>
+                    <td>
+                        <a target="_blank" [routerLink]="['/shift', item.shiftId, 'detail']">Ca số {{item?.shiftId}}
+                        </a>
+                    </td>
+                    <td>{{item?.date| date:'dd/MM/yyyy HH:MM'}}</td>
+                    <td>{{item?.verifyTimeGoIn| date:'HH:MM'}}</td>
+                    <td>
+                        <h5>
+                            <span *ngIf="item.statusGoIn=='1'" class="badge badge-success">
+                                    Đúng giờ
+                            </span>
+                            <span *ngIf="item.statusGoIn=='0'" class="badge badge-danger">
+                                    Sai giờ
+                            </span>
+                        </h5>
+                    </td>
+                    <td>{{item?.timeDifferenceGoIn}} phút</td>
+                    <td>{{item?.verifyTimeGoOut |  date:'HH:MM'}}</td>
+                    <td>
+                        <h5>
+                            <span *ngIf="item.statusGoOut=='1'" class="badge badge-success">
+                                    Đúng giờ
+                            </span>
+                            <span *ngIf="item.statusGoOut=='0'" class="badge badge-danger">
+                                    Sai giờ
+                            </span>
+                        </h5>
+                    </td>
+                    <td>{{item?.timeDifferenceGoOut}} phút</td>
+                    <td>{{item?.verifyTimeStartBreaktime|date:'HH:MM'}}</td>
+                    <td>
+                        <h5>
+                                <span *ngIf="item.statusStartBreaktime=='1'" class="badge badge-success">
+                                        Đúng giờ
+                                </span>
+                            <span *ngIf="item.statusStartBreaktime=='0'" class="badge badge-danger">
+                                        Sai giờ
+                                </span>
+                        </h5>
+                    </td>
+                    <td>{{item?.timeDiffrenceStartBreaktime}} phút</td>
+                    <td>{{item?.verifyTimeEndBreaktime | date: 'HH:mm'}}</td>
+                    <td>
+                        <h5>
+                            <span *ngIf="item.statusEndBreaktime=='1'" class="badge badge-success">
+                                        Đúng giờ
+                            </span>
+                            <span *ngIf="item.statusEndBreaktime=='0'" class="badge badge-danger">
+                                        Sai giờ
+                            </span>
+                        </h5>
+                    </td>
+                    <td>{{item?.timeDiffrenceEndBreaktime}} phút</td>
+                    <td class="text-center">
+                        <button mat-raised-button class="btn btn-warning"
+                                [routerLink]="['/timesheet', item.id, 'update']">Sửa
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <mat-paginator [length]="totalRecords" (page)="handlePagination($event)" [pageSizeOptions]="pageSizeOptions"
+                           showFirstLastButtons [pageIndex]="pageIndex" [pageSize]="pageSize"></mat-paginator>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,123 @@
+<div class="jhi-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card-group">
+                        <div class="card p-4">
+                            <div class="card-body">
+                                <form [formGroup]="createUser">
+                                    <h1>Đăng kí tài khoản</h1>
+                                    <p class="text-muted">Đăng kí tài khoản của bạn ngay bây giờ</p>
+                                    <h3 style="color: #28a745" *ngIf="mess == 1">Đăng kí thành công</h3>
+                                    <h3 style="color: red" *ngIf="mess == 2">Tên đăng nhập đã tồn tại</h3>
+                                    <div class="form-group row">
+                                        <h3 class="col-md-4 col-form-label" for="text-input">Tên đăng nhập:</h3>
+                                        <div class="col-md-8">
+                                            <input type="text" name="text-input" class="form-control" placeholder="Nhập tên đăng nhập ..." formControlName="login" required
+                                                   [class.is-invalid]="createUser.controls.login.invalid && (createUser.controls.login.dirty || createUser.controls.login.touched)">
+                                            <span class="invalid-feedback"
+                                                  *ngIf="createUser.controls.login.errors?.required"> *Tên đăng nhập không được để trống</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.login.errors?.pattern"> *Tên đăng nhập sai định dạng hoặc chứa khoảng trắng</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.login.errors?.minlength"> *Tên đăng nhập không thể quá ngắn</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.login.errors?.maxlength"> *Tên đăng nhập không thể quá dài</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <h3 class="col-md-4 col-form-label" for="text-input">Mật khẩu:</h3>
+                                        <div class="col-md-8">
+                                                <input type="password" name="text-input" class="form-control" placeholder="Nhập mật khẩu ..." formControlName="password"
+                                                       [class.is-invalid]="createUser.controls.password.invalid && (createUser.controls.password.dirty || createUser.controls.password.touched)">
+                                                <span class="invalid-feedback" *ngIf="createUser.controls.password.errors?.minlength"> *Mật khẩu không thể quá ngắn</span>
+                                                <span class="invalid-feedback" *ngIf="createUser.controls.password.errors?.maxlength"> *Mật khẩu không thể quá dài</span>
+                                                <span class="invalid-feedback"
+                                                      *ngIf="createUser.controls.password.errors?.required"> *Mật khẩu không được để trống</span>
+                                            <jhi-password-strength-bar [passwordToCheck]="createUser.get('password').value"></jhi-password-strength-bar>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <h3 class="col-md-4 col-form-label" for="text-input">Xác nhận mật khẩu:</h3>
+                                        <div class="col-md-8">
+                                            <input type="password" name="text-input" class="form-control" placeholder="Nhập mật khẩu ..." formControlName="confirmPassword"
+                                                   [class.is-invalid]="createUser.controls.confirmPassword.invalid && (createUser.controls.confirmPassword.dirty || createUser.controls.confirmPassword.touched)">
+                                            <span class="invalid-feedback"
+                                                  *ngIf="createUser.hasError('notSame')">*Mật khẩu không khớp</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.confirmPassword.errors?.minlength"> *Mật khẩu không thể quá ngắn</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.confirmPassword.errors?.maxlength"> *Mật khẩu không thể quá dài</span>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="createUser.controls.confirmPassword.errors?.required"> *Mật khẩu không được để trống</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <h3 class="col-md-4 col-form-label" for="text-input">Họ:</h3>
+                                        <div class="col-md-8">
+                                            <input type="text" name="text-input" class="form-control" placeholder="Nhập họ ..." formControlName="firstName"
+                                                   [class.is-invalid]="createUser.controls.firstName.invalid && (createUser.controls.firstName.dirty || createUser.controls.firstName.touched)">
+                                            <span class="invalid-feedback"
+                                                  *ngIf="createUser.controls.firstName.errors?.required"> *Họ không được để trống</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.firstName.errors?.pattern"> *Họ không được chứa kí tực đặc biệt</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.firstName.errors?.minlength"> *Họ không thể quá ngắn</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.firstName.errors?.maxlength"> Họ không thể quá dài</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <h3 class="col-md-4 col-form-label" for="text-input">Tên:</h3>
+                                        <div class="col-md-8">
+                                            <input type="text" name="text-input" class="form-control" placeholder="Nhập tên ..." formControlName="lastName"
+                                                   [class.is-invalid]="createUser.controls.lastName.invalid && (createUser.controls.lastName.dirty || createUser.controls.lastName.touched)">
+                                            <span class="invalid-feedback"
+                                                  *ngIf="createUser.controls.lastName.errors?.required"> *Tên không được để trống</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.lastName.errors?.pattern"> *Tên không được chứa kí tực đặc biệt</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.lastName.errors?.minlength"> *Tên không thể quá ngắn</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.lastName.errors?.maxlength"> Tên không thể quá dài</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <h3 class="col-md-4 col-form-label" for="text-input">Email:</h3>
+                                        <div class="col-md-8">
+                                            <input type="text" name="text-input" class="form-control" placeholder="Nhập email ..." formControlName="email"
+                                                   [class.is-invalid]="createUser.controls.email.invalid && (createUser.controls.email.dirty || createUser.controls.email.touched)">
+                                            <span class="invalid-feedback"
+                                                  *ngIf="createUser.controls.email.errors?.required"> *Email không được để trống</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.email.errors?.pattern"> *Email sai định dạng</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.email.errors?.minlength"> *Email không thể quá ngắn</span>
+                                            <span class="invalid-feedback" *ngIf="createUser.controls.email.errors?.maxlength"> Email không thể quá dài</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <h3 class="col-md-4 col-form-label" for="text-input">Công ty:</h3>
+                                        <div class="col-md-8">
+                                            <ng-select formControlName="companyid" [items]="listCompany | async" bindValue="id" bindLabel="name"
+                                                       [addTag]="false"
+                                                       [multiple]="false" [hideSelected]="true"
+                                                       [loading]="companySearchLoading" [typeahead]="companySearchTxt"
+                                                       placeholder="--- Chọn công ty ---"
+                                                       [class.is-invalid]="createUser.controls.companyid.invalid && (createUser.controls.companyid.dirty || createUser.controls.companyid.touched)">
+                                                <ng-template ng-option-tmp let-item="item">
+                                                    {{item.name}}
+                                                </ng-template>
+                                            </ng-select>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="createUser.controls.companyid.errors?.required">*Công ty không được để trống</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-primary px-4" (click) = "register()">Đăng kí</button>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <button type="button" class="btn btn-link px-0" [routerLink]="['/login']">Đăng nhập</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

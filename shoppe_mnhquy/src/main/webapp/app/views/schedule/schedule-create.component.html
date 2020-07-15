@@ -1,0 +1,180 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Tạo lịch trình làm việc mới</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="../../core/image/schedule.png" width="100%"/>
+                    </div>
+                    <div class="col-md-9">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal"
+                              [formGroup]="newSchedule">
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Tên lịch trình*:</h3>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Nhập tên..." formControlName="name"
+                                           [class.is-invalid]="newSchedule.controls.name.invalid && (newSchedule.controls.name.dirty || newSchedule.controls.name.touched)">
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.name.errors?.required"> *Tên không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.name.errors?.pattern"> *Tên không thể quá dài</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="select1">Nhân viên*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select [items]="listEmployee | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               formControlName="employeeId"
+                                               [loading]="employeeLoading" [typeahead]="employeeSearchTxt"
+                                               [class.is-invalid]="newSchedule.controls.employeeId.invalid && (newSchedule.controls.employeeId.dirty || newSchedule.controls.employeeId.touched)"
+                                               placeholder="--- Chọn nhân viên ---" >
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item.name}}
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.employeeId.errors?.required"> *Nhân viên không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Ca thứ 2*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select [items]="listShiftMonday | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               formControlName="mondayShiftId"
+                                               [loading]="shiftSearchLoadingMonday" [typeahead]="shiftMondaySearchTxt"
+                                               [class.is-invalid]="newSchedule.controls.mondayShiftId.invalid && (newSchedule.controls.mondayShiftId.dirty || newSchedule.controls.mondayShiftId.touched)"
+                                               placeholder="--- Chọn ca ---" >
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item?.name}} ({{item?.startTime| date:'HH:mm'}} => {{item?.endTime| date:'HH:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.mondayShiftId.errors?.required"> *Ca làm việc không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Ca thứ 3*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select [items]="listShiftTuesday | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               formControlName="tuesdayShiftId"
+                                               [multiple]="false" [hideSelected]="true"
+                                               [loading]="shiftSearchLoadingTuesday" [typeahead]="shiftTuesdaySearchTxt"
+                                               placeholder="--- Chọn ca ---"
+                                               [class.is-invalid]="newSchedule.controls.tuesdayShiftId.invalid && (newSchedule.controls.tuesdayShiftId.dirty || newSchedule.controls.tuesdayShiftId.touched)">
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item?.name}} ({{item?.startTime| date:'HH:mm'}} => {{item?.endTime| date:'HH:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.tuesdayShiftId.errors?.required"> *Ca làm việc không được để trống</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Ca thứ 4*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select formControlName="wednesdayShiftId"
+                                               [items]="listShiftWednesday | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               [loading]="shiftSearchLoadingWednesday" [typeahead]="shiftWednesdaySearchTxt"
+                                               placeholder="--- Chọn ca ---"
+                                               [class.is-invalid]="newSchedule.controls.wednesdayShiftId.invalid && (newSchedule.controls.wednesdayShiftId.dirty || newSchedule.controls.wednesdayShiftId.touched)">
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item?.name}} ({{item?.startTime| date:'HH:mm'}} => {{item?.endTime| date:'HH:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.wednesdayShiftId.errors?.required"> *Ca làm việc không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Ca thứ 5*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select formControlName="thursdayShiftId"
+                                               [items]="listShiftThursday | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               [loading]="shiftSearchLoadingThursday" [typeahead]="shiftThursdaySearchTxt"
+                                               placeholder="--- Chọn ca ---"
+                                               [class.is-invalid]="newSchedule.controls.thursdayShiftId.invalid && (newSchedule.controls.thursdayShiftId.dirty || newSchedule.controls.thursdayShiftId.touched)">
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item?.name}} ({{item?.startTime| date:'HH:mm'}} => {{item?.endTime| date:'HH:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.thursdayShiftId.errors?.required"> *Ca làm việc không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Ca thứ 6*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select formControlName="fridayShiftId"
+                                               [items]="listShiftFriday | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               [loading]="shiftSearchLoadingFriday" [typeahead]="shiftFridaySearchTxt"
+                                               placeholder="--- Chọn ca ---"
+                                               [class.is-invalid]="newSchedule.controls.fridayShiftId.invalid && (newSchedule.controls.fridayShiftId.dirty || newSchedule.controls.fridayShiftId.touched)">
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item?.name}} ({{item?.startTime| date:'HH:mm'}} => {{item?.endTime| date:'HH:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.fridayShiftId.errors?.required"> *Ca làm việc không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Ca thứ 7*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select formControlName="saturdayShiftId"
+                                               [items]="listShiftSaturday | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               [loading]="shiftSearchLoadingSaturday" [typeahead]="shiftSaturdaySearchTxt"
+                                               placeholder="--- Chọn ca ---"
+                                               [class.is-invalid]="newSchedule.controls.saturdayShiftId.invalid && (newSchedule.controls.saturdayShiftId.dirty || newSchedule.controls.saturdayShiftId.touched)">
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item?.name}} ({{item?.startTime| date:'HH:mm'}} => {{item?.endTime| date:'HH:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.saturdayShiftId.errors?.required"> *Ca làm việc không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Ca chủ nhật*:</h3>
+                                <div class="col-md-9">
+                                    <ng-select formControlName="sundayShiftId"
+                                               [items]="listShiftSunday | async" bindValue="id" bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               [loading]="shiftSearchLoadingSunday" [typeahead]="shiftSundaySearchTxt"
+                                               placeholder="--- Chọn ca ---"
+                                               [class.is-invalid]="newSchedule.controls.sundayShiftId.invalid && (newSchedule.controls.sundayShiftId.dirty || newSchedule.controls.sundayShiftId.touched)">
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item?.name}} ({{item?.startTime| date:'HH:mm'}} => {{item?.endTime| date:'HH:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback" *ngIf="newSchedule.controls.sundayShiftId.errors?.required"> *Ca làm việc không được để trống</span>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn btn-danger">
+                                <i class="fa fa-ban"></i> Đặt lại
+                            </button>
+                            <button type="submit" class="btn btn-success" (click)="create()">
+                                <i class="fa fa-dot-circle-o"></i> Lưu lại
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" [routerLink]="['/schedule', 'list']" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Quay lại</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

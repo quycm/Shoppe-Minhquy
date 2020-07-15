@@ -1,0 +1,56 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card">
+    <div class="card-header">Thêm mới công ty</div>
+    <div class="card-body">
+        <form class="needs-validation form-horizontal" [formGroup]="createUser">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên Công Ty*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.name.invalid && (createUser.controls.name.dirty || createUser.controls.name.touched)"  formControlName="name" placeholder="Tên công ty..."
+                                            type="text">
+                                            <span class="invalid-feedback"
+                                            *ngIf="createUser.controls.name.errors?.required"> *Tên công ty không được để trống</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="col-md-12">
+                                <div class="form-group row">
+                                        <div class="col-md-4">
+                                                <label></label>
+                                            </div>
+                                        <div class="col-md-8">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="activated"
+                                                       formControlName="activated" >
+                                                <label class="custom-control-label" for="activated">Hoạt động</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                         -->
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <div class="col-md-8">
+        <button type="submit" class="btn btn-success" (click)="create()">
+            <i class="fa fa-dot-circle-o"></i> Tạo mới
+        </button>
+    </div>
+
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Chi tiết ưu đãi giờ làm (ID: {{bonus.id}}) </strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="../../core/image/bonus-time.jpg" width="100%"/></div>
+                    <div class="col-md-9">
+                        <div class="form-group row">
+                            <h3 class="col-md-4 col-form-label" for="text-input">Tên ưu đãi:</h3>
+                            <div class="col-md-8">
+                                {{bonus.name}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <h3 class="col-md-4 col-form-label" for="text-input">Thời gian cho phép vào muộn:</h3>
+                            <div class="col-md-8">
+                                {{bonus.inShift}} phút
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <h3 class="col-md-4 col-form-label" for="text-input">Thời gia cho phép về sớm:</h3>
+                            <div class="col-md-8">
+                                {{bonus.outShift}} phút
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <h3 class="col-md-4 col-form-label" for="text-input">Ghi chú thêm:</h3>
+                            <div class="col-md-8">
+                                {{bonus.note}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <h3 class="col-md-4 col-form-label" for="text-input">Trạng thái: </h3>
+                            <div class="col-md-8">
+                                <h5>
+                                <span *ngIf="bonus.status=='1'" class="badge badge-success">
+                                    ACTIVE
+                                </span>
+                                    <span *ngIf="bonus.status=='0'" class="badge badge-danger">
+                                    DEACTIVE
+                                </span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" [routerLink]="['/bonus', 'list']" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Quay lại</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

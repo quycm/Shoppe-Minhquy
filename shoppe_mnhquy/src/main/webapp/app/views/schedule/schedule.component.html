@@ -1,0 +1,100 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <i class="fa fa-align-justify"></i>
+                    <h5 class="card-header-text d-inline-block">Danh sách Lịch trình</h5>
+                </div>
+                <div class="col-md-6">
+                    <div class="pr-lg-4 text-center text-md-right">
+                        <button mat-raised-button class=" btn btn-dark btn-sm" [routerLink]="['/schedule', 'new']">Thêm mới Lịch trình</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <!--            <app-alert></app-alert>-->
+            <div class="float-right p-2 row">
+                <div>
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Tìm kiếm bằng tên" [formControl]="name">
+                    </mat-form-field>
+                    <button mat-icon-button class="button-search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <table class="table table-bordered table-responsive-lg text-center" matSort>
+                <thead class="full-width">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên lịch trình</th>
+                    <th>Tên nhân viên</th>
+                    <th>Ca thứ 2</th>
+                    <th>Ca thứ 3</th>
+                    <th>Ca thứ 4</th>
+                    <th>Ca thứ 5</th>
+                    <!--                    <th>Thời gian giải lao</th>-->
+                    <th>Ca thứ 6</th>
+                    <th>Ca thứ 7</th>
+                    <th>Ca chủ nhật</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody *ngIf="sortedData?.length <1">
+                <th colspan="11" rowspan="1" class="text-center bg-light text-dark" >
+                    <h3>Danh sách ca làm việc trống</h3>
+                </th>
+                </tbody>
+                <tbody *ngFor="let item of sortedData; let i = index">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item?.name}}</td>
+                    <td>{{item?.employees?.name}}</td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.mondayShiftId, 'detail']">Ca {{item?.mondayShiftId}}
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.tuesdayShiftId, 'detail']">Ca {{item?.tuesdayShiftId}}
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.wednesdayShiftId, 'detail']">Ca {{item?.wednesdayShiftId}}
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.thursdayShiftId, 'detail']">Ca {{item?.thursdayShiftId}}
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.fridayShiftId, 'detail']">Ca {{item?.fridayShiftId}}
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.saturdayShiftId, 'detail']">Ca {{item?.saturdayShiftId}}
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.sundayShiftId, 'detail']">Ca {{item?.sundayShiftId}}
+                        </a>
+                    </td>
+                    <td class="text-center" style="width: 180px">
+                        <button mat-raised-button class="btn btn-warning" [routerLink]="['/schedule', item.id, 'update']">Sửa</button>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <mat-paginator [length]="totalRecords" (page)="handlePagination($event)" [pageSizeOptions]="pageSizeOptions"
+                           showFirstLastButtons [pageIndex]="pageIndex" [pageSize]="pageSize"></mat-paginator>
+        </div>
+    </div>
+</div>
+

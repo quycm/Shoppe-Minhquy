@@ -1,0 +1,296 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Chỉnh sửa ca làm việc</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="../../core/image/shift.png" width="100%"/></div>
+                    <div class="col-md-9">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal"
+                              [formGroup]="updateShift">
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Tên ca*:</h3>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control"
+                                           [class.is-invalid]="updateShift.controls.name.invalid && (updateShift.controls.name.dirty || updateShift.controls.name.touched)"
+                                           placeholder="Nhập tên..." formControlName="name">
+                                    <span class="invalid-feedback" *ngIf="updateShift.controls.name.errors?.required"> *Tên ca làm việc không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="updateShift.controls.name.errors?.pattern"> *Tên ca làm việc không thể quá dài</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Hệ số lương*:</h3>
+                                <div class="col-md-9">
+                                    <input type="number" class="form-control" step="0.1"
+                                           [class.is-invalid]="updateShift.controls.coefficient.invalid && (updateShift.controls.coefficient.dirty || updateShift.controls.coefficient.touched)"
+                                           placeholder="Nhập hệ số lương..." formControlName="coefficient">
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateShift.controls.coefficient.errors?.required"> *Hệ số lương không được sai định dạng hoặc để trống</span>
+                                    <span class="invalid-feedback" *ngIf="updateShift.controls.coefficient.errors?.max"> *Hệ số lương không thể quá lớn</span>
+                                    <span class="invalid-feedback" *ngIf="updateShift.controls.coefficient.errors?.min"> *Hệ số lương không thể nhỏ hơn 0</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian ca*:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đầu*:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="startTime" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.startTime.invalid && (updateShift.controls.startTime.dirty || updateShift.controls.startTime.touched)"
+                                            >Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.startTime.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc*:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="endTime" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.endTime.invalid && (updateShift.controls.endTime.dirty || updateShift.controls.endTime.touched)">Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.endTime.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian vào làm*:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đầu*:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="startGoIn" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.startGoIn.invalid && (updateShift.controls.startGoIn.dirty || updateShift.controls.startGoIn.touched)">Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.startGoIn.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc*:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="endGoIn" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.endGoIn.invalid && (updateShift.controls.endGoIn.dirty || updateShift.controls.endGoIn.touched)">Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.endGoIn.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian tan ca*:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đầu*:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="startGoOut" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.startGoOut.invalid && (updateShift.controls.startGoOut.dirty || updateShift.controls.startGoOut.touched)">Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.startGoOut.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc*:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="endGoOut" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.endGoOut.invalid && (updateShift.controls.endGoOut.dirty || updateShift.controls.endGoOut.touched)">Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.endGoOut.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian nghỉ giải lao*:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đầu*:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="startBreakTime" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.startBreakTime.invalid && (updateShift.controls.startBreakTime.dirty || updateShift.controls.startBreakTime.touched)">Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.startBreakTime.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        formControlName="endBreakTime" [timeOnly]="true"
+                                                        [class.is-invalid]="updateShift.controls.endBreakTime.invalid && (updateShift.controls.endBreakTime.dirty || updateShift.controls.endBreakTime.touched)"
+                                            >Chọn giờ
+                                            </p-calendar>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.endBreakTime.errors?.required"> *Thời gian không được để trống</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Tính thời gian làm thêm trước
+                                    ca*:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-4" >
+                                            <p-toggleButton formControlName="isOvertimeShiftBefore"
+                                                            onLabel="Tính thời gian" offLabel="Không tính"
+                                                            onIcon="pi pi-check" offIcon="pi pi-times"
+                                                            (onChange)="changeOvertimeShiftBefore()"
+                                                            [style]="{'width':'180px'}"></p-toggleButton>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="updateShift.controls.isOvertimeShiftBefore.value === true">
+                                            Số phút*:
+                                        </div>
+                                        <div class="col-md-6" *ngIf="updateShift.controls.isOvertimeShiftBefore.value === true">
+                                            <input type="number" class="form-control"
+                                                   formControlName="overtimeShiftBefore"
+                                                   [class.is-invalid]="updateShift.controls.overtimeShiftBefore.invalid && (updateShift.controls.overtimeShiftBefore.dirty || updateShift.controls.overtimeShiftBefore.touched)"
+                                                   placeholder="Nhập số phút...">
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.overtimeShiftBefore.errors?.required"> *Số phút không được để trống</span>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.overtimeShiftBefore.errors?.min"> *Số phút không được nhỏ hơn 0</span>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.overtimeShiftBefore.errors?.max"> *Số phút thể quá lớn</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Tính thời gian làm thêm sau
+                                    ca*:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p-toggleButton formControlName="isOvertimeShiftAfter"
+                                                            (onChange)="changeOvertimeShiftAfter()"
+                                                            onLabel="Tính thời gian" offLabel="Không tính"
+                                                            onIcon="pi pi-check" offIcon="pi pi-times"
+                                                            [style]="{'width':'180px'}"></p-toggleButton>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="updateShift.controls.isOvertimeShiftAfter.value === true">
+                                            Số phút*:
+                                        </div>
+                                        <div class="col-md-6" *ngIf="updateShift.controls.isOvertimeShiftAfter.value === true">
+                                            <input type="number" class="form-control"
+                                                   formControlName="overtimeShiftAfter"
+                                                   [class.is-invalid]="updateShift.controls.overtimeShiftAfter.invalid && (updateShift.controls.overtimeShiftAfter.dirty || updateShift.controls.overtimeShiftAfter.touched)"
+                                                   placeholder="Nhập số phút..." >
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.overtimeShiftAfter.errors?.required"> *Số phút không được để trống</span>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.overtimeShiftAfter.errors?.min"> *Số phút không được nhỏ hơn 0</span>
+                                            <span class="invalid-feedback"
+                                                  *ngIf="updateShift.controls.overtimeShiftAfter.errors?.max"> *Số phút thể quá lớn</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Cho phép về sớm*
+                                    :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton formControlName="leaveEarlyAccept" onLabel="Cho phép"
+                                                    offLabel="Không cho phép" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'180px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Cho phép đi muộn*
+                                    :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton formControlName="goLateAccept" onLabel="Cho phép"
+                                                    offLabel="Không cho phép" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'180px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Không tính thời gian bắt đầu*
+                                    :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton formControlName="isNotConfirmStart" onLabel="Cho phép"
+                                                    offLabel="Không cho phép" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'180px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Không tính thời gian kết thúc*
+                                    :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton formControlName="isNotConfirmEnd" onLabel="Cho phép"
+                                                    offLabel="Không cho phép" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'180px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Làm qua đêm*
+                                    :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton formControlName="isOvernight" onLabel="Cho phép"
+                                                    offLabel="Không cho phép" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'180px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Cắt ca ngày/đêm*
+                                    :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton formControlName="isSplitDayNight" onLabel="Cắt ca"
+                                                    offLabel="Không cắt ca" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    (onChange)="changeSplitDayNight()"
+                                                    [style]="{'width':'180px'}" ></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row" *ngIf="updateShift.controls.isSplitDayNight.value === true">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Giờ Ca ngày/đêm*
+                                    :</h3>
+                                <div class="col-md-9 row">
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Ca ngày*:</h3>
+                                    <div class="col-md-4">
+                                        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                    formControlName="dayTime" [timeOnly]="true"
+                                                    [class.is-invalid]="updateShift.controls.dayTime.invalid && (updateShift.controls.dayTime.dirty || updateShift.controls.dayTime.touched)">Chọn giờ
+                                        </p-calendar>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateShift.controls.dayTime.errors?.required"> *Thời gian không được để trống</span>
+                                    </div>
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Ca đêm*:</h3>
+                                    <div class="col-md-4">
+                                        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                    formControlName="nightTime" [timeOnly]="true"
+                                                    [class.is-invalid]="updateShift.controls.nightTime.invalid && (updateShift.controls.nightTime.dirty || updateShift.controls.nightTime.touched)">Chọn giờ
+                                        </p-calendar>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateShift.controls.nightTime.errors?.required"> *Thời gian không được để trống</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn btn-danger">
+                                <i class="fa fa-ban"></i> Đặt lại
+                            </button>
+                            <button type="submit" class="btn btn-success" (click)="update()">
+                                <i class="fa fa-dot-circle-o"></i> Lưu lại
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" [routerLink]="['/shift', 'list']" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Quay lại</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

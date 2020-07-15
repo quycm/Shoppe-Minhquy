@@ -1,0 +1,40 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card">
+    <div class="card-header">Tạo đơn vị</div>
+    <div class="card-body">
+        <form class="needs-validation form-horizontal" [formGroup]="createUser">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.name.invalid && (createUser.controls.name.dirty || createUser.controls.name.touched)" maxlength="100"  formControlName="name" placeholder="Tên Đơn vị..."
+                                            type="text">
+                                            <span class="invalid-feedback"
+                                            *ngIf="createUser.controls.name.errors?.required"> *Tên không được để trống</span>
+                                            <span class="invalid-feedback"
+                                            *ngIf="createUser.controls.name.errors?.maxlength"> *Tên quá ký tự cho phép</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+        </form>
+        <hr>
+
+        <button type="submit" class="btn btn-success" (click)="create()">
+            <i class="fa fa-dot-circle-o"></i> Tạo mới
+        </button>
+
+    </div>
+</div>

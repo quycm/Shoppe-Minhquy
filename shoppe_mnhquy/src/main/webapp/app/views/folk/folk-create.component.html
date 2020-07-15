@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Tạo mới dân tộc</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+<!--                        <img width="50%" src="../../../content/img/customerType_default.png"><img>-->
+                    </div>
+                    <div class="col-md-8">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal"
+                              [formGroup]="newFolk">
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Tên dân tộc*:</h3>
+                                <div class="col-md-9">
+                                    <input type="text" id="text-input" name="text-input" class="form-control"
+                                           [class.is-invalid]="newFolk.controls.name.invalid && (newFolk.controls.name.dirty || newFolk.controls.name.touched)"
+                                           placeholder="Nhập tên dân tộc..." formControlName="name">
+                                    <span class="invalid-feedback"
+                                          *ngIf="newFolk.controls.name.errors?.required"> *Tên dân tộc không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="newFolk.controls.name.errors?.pattern"> *Tên dân tộc không thể quá dài</span>
+                                    <span class="invalid-feedback" *ngIf="newFolk.controls.name.errors?.exists"> *Dân tộc này đã được tạo</span>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn btn-danger">
+                                <i class="fa fa-ban"></i> Đặt lại
+                            </button>
+                            <button type="submit" class="btn btn-success" (click)="createNewCustomersType()">
+                                <i class="fa fa-dot-circle-o"></i> Lưu lại
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" [routerLink]="['/folk', 'list']" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Quay lại</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

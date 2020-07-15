@@ -1,0 +1,201 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card">
+    <div class="card-header">Chỉnh sửa tài khoản</div>
+    <div class="card-body">
+        <form class="needs-validation form-horizontal"  [formGroup]="createUser">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên đăng nhập:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="login" placeholder="Username"
+                                            type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Mật khẩu:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input  class="form-control" formControlName="password"
+                                            placeholder="Nhập mật khẩu" type="password">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Họ:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="firstName"
+                                            placeholder="Nhập First Name" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="lastName"
+                                            placeholder="Nhập Last Name" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Email:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control"  formControlName="email" placeholder="Nhập email"
+                                            type="email">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Công ty:</label>
+                                    </div>
+                                    <div class="col-md-8">
+<!--                                        <ng-select class="custom" [items]="authen" bindLabel="name"-->
+<!--                                                   [virtualScroll]="true"-->
+<!--                                                   bindValue="id" appendTo="body" placeholder="Select Company"-->
+<!--                                                    formControlName="companyid">-->
+<!--                                        </ng-select>-->
+                                        <ng-select formControlName="companyid" [items]="listCompany | async" bindValue="id" bindLabel="name"
+                                                   [addTag]="false"
+                                                   [multiple]="false" [hideSelected]="true"
+                                                   [loading]="companySearchLoading" [typeahead]="companySearchTxt"
+                                                   placeholder="--- Chọn công ty ---"
+                                                   [class.is-invalid]="createUser.controls.companyid.invalid && (createUser.controls.companyid.dirty || createUser.controls.companyid.touched)">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                        <!-- <div
+                                            *ngIf="createUser.controls.department.invalid && (createUser.controls.department.dirty || createUser.controls.department.touched)">
+                                            <span class="error-mess" *ngIf="createUser.controls.department.errors?.required">
+                                                *Phòng ban không được để trống </span>
+                                        </div>
+                                        <div *ngIf="checkError">
+                                            <span class="error-mess" *ngIf="createUser.controls.department.errors?.required">
+                                                *Phòng ban thoại không được để trống </span>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>ROLE:</label>
+                                    </div>
+                                    <div class="col-md-8">
+
+                                        <!-- <input class="form-control" formControlName="gender" placeholder="Gender" type="text" maxlength="4"> -->
+                                        <div class="input-group-prepend">
+                                            <div class="col-3 input-group-text">
+
+                                                <!-- <input  type="checkbox" formControlName="authorities" checked
+                                                    aria-label="Checkbox for following text input" [value]="'ROLE_USER'"> ROLE_USER -->
+                                                <p-checkbox name="authorities" value="ROLE_USER"
+                                                            [formControl]="createUser.controls['authorities']"
+                                                            label="ROLE_USER"></p-checkbox>
+
+                                            </div>
+                                            <div class="col-md-1"></div>
+
+                                            <div class="col-3 input-group-text">
+
+                                                <!-- <input type="checkbox" formControlName="authorities" checked
+                                                    aria-label="Checkbox for following text input" [value]="'ROLE_ADMIN'"> ROLE_ADMIN -->
+                                                <p-checkbox name="authorities" value="ROLE_ADMIN"
+                                                            [formControl]="createUser.controls['authorities']"
+                                                            label="ROLE_ADMIN"></p-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- <div
+                                    *ngIf="createUser.controls.gender.invalid && (createUser.controls.gender.dirty || createUser.controls.gender.touched)">
+                                    <span class="error-mess" *ngIf="createUser.controls.gender.errors?.required">
+                                        *Giới tính không được để trống </span>
+                                </div>
+                                <div *ngIf="checkError">
+                                    <span class="error-mess" *ngIf="createUser.controls.gender.errors?.required">
+                                        *Giới tính không được để trống </span>
+                                </div> -->
+                                <!-- </div>
+                            </div> -->
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-12">
+                                <div class="form-group row">
+                                        <div class="col-md-4">
+                                                <label></label>
+                                            </div>
+                                        <div class="col-md-8">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="activated"
+                                                       formControlName="activated" >
+                                                <label class="custom-control-label" for="activated">Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div> -->
+
+
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- <div class="form-group row">
+                <h3 class="col-md-4 col-form-label d-flex align-items-center" for="file-multiple-input"><b >Hình ảnh:</b></h3>
+                <div class="col-md-8">
+                    <input type="file" id="file-multiple-input" name="file-multiple-input" multiple
+                        (change)="uploadFile($event)">
+                </div>
+            </div> -->
+
+        </form>
+        <hr>
+
+        <button type="submit" class="btn btn-success" (click)="confirm()">
+            <i class="fa fa-dot-circle-o"></i> Chỉnh sửa 
+        </button>
+
+    </div>
+</div>

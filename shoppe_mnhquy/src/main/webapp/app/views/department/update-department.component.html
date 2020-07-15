@@ -1,0 +1,35 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card">
+    <div class="card-header">Cập nhật Phòng ban</div>
+    <div class="card-body">
+        <form class="needs-validation form-horizontal" [formGroup]="createUser">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên phòng ban:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.name.invalid && (createUser.controls.name.dirty || createUser.controls.name.touched)" formControlName="name" placeholder="Tên phòng ban..."
+                                               type="text">
+                                               <span class="invalid-feedback" *ngIf="createUser.controls.name.errors?.required"> *Tên không được để trống</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <button type="submit" class="btn btn-success" (click)="confirm()">
+            <i class="fa fa-dot-circle-o"></i> Chỉnh sửa
+        </button>
+
+    </div>
+</div>

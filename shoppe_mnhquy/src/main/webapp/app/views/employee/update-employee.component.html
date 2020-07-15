@@ -1,0 +1,234 @@
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card">
+    <div class="card-header">Tạo mới nhân viên</div>
+    <div class="card-body">
+        <form class="needs-validation form-horizontal" [formGroup]="createUser">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên nhân viên:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="name" placeholder="Nhập tên ..."
+                                               type="text">
+                                        <div
+                                            *ngIf="createUser.controls.name.invalid && (createUser.controls.name.dirty || createUser.controls.name.touched)">
+                                            <span style="color: red"class="error-mess" *ngIf="createUser.controls.name.errors?.required">
+                                                *Tên nhân viên không được để trống </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Địa chỉ:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="address" placeholder="Nhập địa chỉ ..."
+                                               type="text">
+                                        <div
+                                            *ngIf="createUser.controls.address.invalid && (createUser.controls.address.dirty || createUser.controls.address.touched)">
+                                            <span style="color: red"class="error-mess"
+                                                  *ngIf="createUser.controls.address.errors?.required">
+                                                *Địa chỉ không được để trống </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Email:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="email" placeholder="Nhập Email ..."
+                                               type="email">
+
+                                        <div
+                                            *ngIf="createUser.controls.email.invalid && (createUser.controls.email.dirty || createUser.controls.email.touched)">
+                                            <span style="color: red"class="error-mess" *ngIf="createUser.controls.email.errors?.required">
+                                                *Email không được để trống </span>
+                                            <span class="error-mess" style="color:red"
+                                                  *ngIf="createUser.controls.email.errors?.pattern"> *Email sai định dạng</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Ngày sinh:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="dob" placeholder="Nhập ngày sinh ..." type="date">
+                                        <div
+                                            *ngIf="createUser.controls.dob.invalid && (createUser.controls.dob.dirty || createUser.controls.dob.touched)">
+                                            <span style="color: red"class="error-mess" *ngIf="createUser.controls.dob.errors?.required">
+                                                *Ngày sinh không được để trống </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Giới tính:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                       
+                                        <div class="input-group-prepend">
+
+                                            <p-selectButton [options]="genders" formControlName="gender"></p-selectButton>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Số điện thoại:</label>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <input class="form-control" formControlName="phone" placeholder="Nhập số điện thoại ..."
+                                               type="text"   minlength="10" maxlength="11" >
+
+
+                                        <div
+                                            *ngIf="createUser.controls.phone.invalid && (createUser.controls.phone.dirty || createUser.controls.phone.touched)">
+                                            <span style="color: red"class="error-mess" *ngIf="createUser.controls.phone.errors?.required">
+                                                *Số điện thoại không được để trống </span>
+                                            <span class="error-mess" style="color: red;"
+                                                  *ngIf="createUser.controls.phone.errors?.pattern"> *Số điện thoại sai định dạng</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Phòng ban:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      
+                                        <ng-select formControlName="departmentid" [items]="listDepartment | async" bindValue="id" bindLabel="name"
+                                                   [addTag]="false"
+                                                   [multiple]="false" [hideSelected]="true"
+                                                   [loading]="departmentSearchLoading" [typeahead]="departmentSearchTxt"
+                                                   placeholder="--- Chọn phòng ban ---">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                        <div
+                                            *ngIf="createUser.controls.departmentid.invalid && (createUser.controls.departmentid.dirty || createUser.controls.departmentid.touched)">
+                                            <span style="color: red"class="error-mess" *ngIf="createUser.controls.departmentid.errors?.required">
+                                                *Phòng ban không được để trống </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Đơn vị:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                       
+                                        <ng-select formControlName="positionid" [items]="listPositon | async" bindValue="id" bindLabel="name"
+                                                   [addTag]="false"
+                                                   [multiple]="false" [hideSelected]="true"
+                                                   [loading]="positionSearchLoading" [typeahead]="positionSearchTxt"
+                                                   placeholder="--- Chọn đơn vị ---">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                        <div
+                                            *ngIf="createUser.controls.positionid.invalid && (createUser.controls.positionid.dirty || createUser.controls.positionid.touched)">
+                                            <span style="color: red"class="error-mess" *ngIf="createUser.controls.positionid.errors?.required">
+                                                *Đơn vị không được để trống </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Dân tộc:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                       
+                                        <ng-select formControlName="folkid" [items]="listFolk | async" bindValue="id" bindLabel="name"
+                                                   [addTag]="false"
+                                                   [multiple]="false" [hideSelected]="true"
+                                                   [loading]="folkSearchLoading" [typeahead]="folkSearchTxt"
+                                                   placeholder="--- Chọn dân tộc ---">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                        <div
+                                            *ngIf="createUser.controls.folkid.invalid && (createUser.controls.folkid.dirty || createUser.controls.folkid.touched)">
+                                            <span style="color: red"class="error-mess" *ngIf="createUser.controls.folkid.errors?.required">
+                                                *Dân tộc ko được để trống </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Ưu đãi giờ làm:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <ng-select [items]="listBonus | async" bindValue="id" bindLabel="name"
+                                                   [addTag]="false"
+                                                   formControlName="bonusid"
+                                                   [multiple]="false" [hideSelected]="true"
+                                                   [loading]="bonusSearchLoading" [typeahead]="bonusSearchTxt"
+                                                   placeholder="Chọn ưu đãi ..." required>
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.name}} (Vào muộn {{item.inShift}} phút, về sớm {{item.outShift}} phút)
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </form>
+        <button type="submit" class="btn btn-success" (click)="confirm()">
+            <i class="fa fa-dot-circle-o"></i> Chỉnh sửa
+        </button>
+    </div>
+</div>

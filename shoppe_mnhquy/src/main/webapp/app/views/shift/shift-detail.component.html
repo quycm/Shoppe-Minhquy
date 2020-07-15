@@ -1,0 +1,227 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Chi tiết ca làm việc (Ca làm việc số {{shift.id}}) </strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="../../core/image/shift.png" width="100%"/></div>
+                    <div class="col-md-9">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal"
+                              [formGroup]="detailShift">
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Tên ca:</h3>
+                                <div class="col-md-9">
+                                    <input readonly style="background-color: white" type="text" class="form-control"
+                                            formControlName="name" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Hệ số lương:</h3>
+                                <div class="col-md-9">
+                                    <input readonly style="background-color: white" type="text" class="form-control" step="0.1"
+                                          formControlName="coefficient">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Trạng thái: </h3>
+                                <div class="col-md-9">
+                                    <h5>
+                                <span *ngIf="shift.status=='1'" class="badge badge-success">
+                                    ACTIVE
+                                </span>
+                                        <span *ngIf="shift.status=='0'" class="badge badge-danger">
+                                   DEACTIVE
+                                </span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian ca:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đầu:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled formControlName="startTime" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="endTime" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian vào làm :</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đầu:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="startGoIn" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="endGoIn" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian tan ca:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đâu:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="startGoOut" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="endGoOut" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian nghỉ:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Bắt đầu:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="startBreakTime" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                        <h3 class="col-md-2 col-form-label" for="text-input">Kết thúc:</h3>
+                                        <div class="col-md-4">
+                                            <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="endBreakTime" [timeOnly]="true">Chọn giờ
+                                            </p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Làm thêm trước ca:</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p-toggleButton disabled formControlName="isOvertimeShiftBefore"
+                                                            onLabel="Có" offLabel="Không"
+                                                            onIcon="pi pi-check" offIcon="pi pi-times"
+                                                            [style]="{'width':'150px'}"></p-toggleButton>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="detailShift.value.isOvertimeShiftBefore == true">
+                                            Số phút làm thêm :
+                                        </div>
+                                        <div class="col-md-6" *ngIf="detailShift.value.isOvertimeShiftBefore == true">
+                                            <input readonly style="background-color: white" type="number" class="form-control" formControlName="overtimeShiftBefore"
+                                                   placeholder="Nhập số phút...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Làm thêm sau ca</h3>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p-toggleButton disabled formControlName="isOvertimeShiftAfter"
+                                                            onLabel="Có" offLabel="Không"
+                                                            onIcon="pi pi-check" offIcon="pi pi-times"
+                                                            [style]="{'width':'150px'}"></p-toggleButton>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="detailShift.value.isOvertimeShiftAfter == true">
+                                            Số phút làm thêm :
+                                        </div>
+                                        <div class="col-md-6" *ngIf="detailShift.value.isOvertimeShiftAfter == true">
+                                            <input readonly style="background-color: white" type="number" class="form-control" formControlName="overtimeShiftAfter"
+                                                   placeholder="Nhập số phút...">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Cho phép về sớm: </h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton disabled formControlName="leaveEarlyAccept" onLabel="Cho phép"
+                                                    offLabel="Từ chối" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'150px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Cho phép đến muộn: </h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton disabled formControlName="goLateAccept" onLabel="Cho phép"
+                                                    offLabel="Từ chối" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'150px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input"> Không tính thời gian bắt đầu:
+                                    :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton disabled formControlName="isNotConfirmStart" onLabel="Có"
+                                                    offLabel="Không" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'150px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input"> Không tính thời gian kết thúc :</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton disabled formControlName="isNotConfirmEnd" onLabel="Có"
+                                                    offLabel="Không" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'150px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Làm qua đêm: </h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton disabled formControlName="isOvernight" onLabel="Có"
+                                                    offLabel="Không" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'150px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Cắt ca ngày/đêm:</h3>
+                                <div class="col-md-9">
+                                    <p-toggleButton disabled formControlName="isSplitDayNight" onLabel="Có"
+                                                    offLabel="Không" onIcon="pi pi-check" offIcon="pi pi-times"
+                                                    [style]="{'width':'150px'}"></p-toggleButton>
+                                </div>
+                            </div>
+                            <div class="form-group row" *ngIf="detailShift.value.isSplitDayNight == true">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian cắt ca:
+                                    :</h3>
+                                <div class="col-md-9 row">
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Thời gian ngày:</h3>
+                                    <div class="col-md-4">
+                                        <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="dayTime" [timeOnly]="true" >Chọn giờ
+                                        </p-calendar>
+                                    </div>
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Thời gian đêm:</h3>
+                                    <div class="col-md-4">
+                                        <p-calendar disabled [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="nightTime" [timeOnly]="true">Chọn giờ
+                                        </p-calendar>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" [routerLink]="['/shift', 'list']" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Quay lại</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

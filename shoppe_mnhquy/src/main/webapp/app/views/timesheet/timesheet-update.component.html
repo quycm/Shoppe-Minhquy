@@ -1,0 +1,234 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Tạo mới thời gian biểu</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="../../core/image/timesheet-icon.png" width="100%"/></div>
+                    <div class="col-md-9">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal"
+                              [formGroup]="updateTimesheet">
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">ID chấm công nhân viên:</h3>
+                                <div class="col-md-9">
+                                    <input type="number" name="text-input" class="form-control"
+                                           placeholder="Nhập tên ID chấm công nhân viên ..." formControlName="userIdTk"
+                                           [class.is-invalid]="updateTimesheet.controls.userIdTk.invalid && (updateTimesheet.controls.userIdTk.dirty || updateTimesheet.controls.userIdTk.touched)">
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateTimesheet.controls.userIdTk.errors?.required"> *ID chấm công nhân viên không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="updateTimesheet.controls.userIdTk.errors?.min"> *ID chấm công nhân viên phải lớn hơn hoặc bằng 0</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label">Chọn ca chấm công:</h3>
+                                <div class="col-md-9">
+                                    <ng-select formControlName="shiftId" [items]="listShift | async" bindValue="id"
+                                               bindLabel="name"
+                                               [addTag]="false"
+                                               [multiple]="false" [hideSelected]="true"
+                                               [loading]="shiftSearchLoading" [typeahead]="shiftSearchTxt"
+                                               placeholder="--- Chọn ca ---"
+                                               [class.is-invalid]="updateTimesheet.controls.shiftId.invalid && (updateTimesheet.controls.shiftId.dirty || updateTimesheet.controls.shiftId.touched)">
+                                        <ng-template ng-option-tmp let-item="item">
+                                            {{item.name}} ({{item.startTime| date: 'h:mm'}}
+                                            - {{item.endTime| date: 'h:mm'}})
+                                        </ng-template>
+                                    </ng-select>
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateTimesheet.controls.shiftId.errors?.required"> *Ca chấm công không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Thời gian chấm công: </h3>
+                                <div class="col-md-9">
+                                    <p-calendar appendTo="body" [baseZIndex]="1021"
+                                                formControlName="date"
+                                                [style]="{'width':'100%'}"
+                                                dateFormat="dd.mm.yy"
+                                                [inputStyle]="{'width':'100%'}"
+                                                placeholder="Chọn ngày giờ ..." [locale]="vn"
+                                                [showTime]="true"
+                                                [class.is-invalid]="updateTimesheet.controls.date.invalid && (updateTimesheet.controls.date.dirty || updateTimesheet.controls.date.touched)">
+                                    </p-calendar>
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateTimesheet.controls.date.errors?.required"> *Thời gian chấm công không được để trống</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Vào ca thực tế: </h3>
+                                <div class="col-md-9 row">
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Thời gian: </h3>
+                                    <div class="col-md-3">
+                                        <p-calendar formControlName="verifyTimeGoIn"
+                                                    [style]="{'width':'100%'}"
+                                                    [inputStyle]="{'width':'100%'}"
+                                                    placeholder="Chọn thời gian ..." [locale]="vn"
+                                                    [timeOnly]="true"
+                                                    [class.is-invalid]="updateTimesheet.controls.verifyTimeGoIn.invalid && (updateTimesheet.controls.verifyTimeGoIn.dirty || updateTimesheet.controls.verifyTimeGoIn.touched)">
+                                        </p-calendar>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.verifyTimeGoIn.errors?.required">*Không được để trống</span>
+                                    </div>
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Muộn (phút): </h3>
+                                    <div class="col-md-3">
+                                        <input type="number" name="text-input" class="form-control"
+                                               placeholder="Nhập số phút ..." formControlName="timeDifferenceGoIn" (ngModelChange)="changeDifferenceGoIn()"
+                                               [class.is-invalid]="updateTimesheet.controls.timeDifferenceGoIn.invalid && (updateTimesheet.controls.timeDifferenceGoIn.dirty || updateTimesheet.controls.timeDifferenceGoIn.touched)">
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDifferenceGoIn.errors?.required">*Không được để trống</span>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDifferenceGoIn.errors?.min">*Phải lớn hơn 0</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>
+                                        <span *ngIf="updateTimesheet.value.timeDifferenceGoIn === 0"
+                                              class="badge badge-success">
+                                            Đúng giờ
+                                        </span>
+                                            <span *ngIf="updateTimesheet.value.timeDifferenceGoIn > 0"
+                                                  class="badge badge-danger">
+                                            Sai giờ
+                                        </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Tan ca thực tế: </h3>
+                                <div class="col-md-9 row">
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Thời gian: </h3>
+                                    <div class="col-md-3">
+                                        <p-calendar formControlName="verifyTimeGoOut"
+                                                    [style]="{'width':'100%'}"
+                                                    [inputStyle]="{'width':'100%'}"
+                                                    placeholder="Chọn thời gian ..." [locale]="vn"
+                                                    [timeOnly]="true"
+                                                    [class.is-invalid]="updateTimesheet.controls.verifyTimeGoOut.invalid && (updateTimesheet.controls.verifyTimeGoOut.dirty || updateTimesheet.controls.verifyTimeGoOut.touched)">
+                                        </p-calendar>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.verifyTimeGoOut.errors?.required">*Không được để trống</span>
+                                    </div>
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Sớm (phút): </h3>
+                                    <div class="col-md-3">
+                                        <input type="number" name="text-input" class="form-control"
+                                               placeholder="Nhập số phút ..." formControlName="timeDifferenceGoOut" (ngModelChange)="changeDifferenceGoOut()"
+                                               [class.is-invalid]="updateTimesheet.controls.timeDifferenceGoOut.invalid && (updateTimesheet.controls.timeDifferenceGoOut.dirty || updateTimesheet.controls.timeDifferenceGoOut.touched)">
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDifferenceGoOut.errors?.required">*Không được để trống</span>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDifferenceGoOut.errors?.min">*Phải lớn hơn 0</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>
+                                        <span *ngIf="updateTimesheet.value.timeDifferenceGoOut === 0"
+                                              class="badge badge-success">
+
+                                            Đúng giờ
+                                        </span>
+                                            <span *ngIf="updateTimesheet.value.timeDifferenceGoOut > 0"
+                                                  class="badge badge-danger">
+                                            Sai giờ
+                                        </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Giờ ra giải lao: </h3>
+                                <div class="col-md-9 row">
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Thời gian: </h3>
+                                    <div class="col-md-3">
+                                        <p-calendar formControlName="verifyTimeStartBreaktime"
+                                                    [style]="{'width':'100%'}"
+                                                    [inputStyle]="{'width':'100%'}"
+                                                    placeholder="Chọn thời gian ..." [locale]="vn"
+                                                    [timeOnly]="true"
+                                                    [class.is-invalid]="updateTimesheet.controls.verifyTimeStartBreaktime.invalid && (updateTimesheet.controls.verifyTimeStartBreaktime.dirty || updateTimesheet.controls.verifyTimeStartBreaktime.touched)">
+                                        </p-calendar>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.verifyTimeStartBreaktime.errors?.required">*Không được để trống</span>
+                                    </div>
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Sớm (phút): </h3>
+                                    <div class="col-md-3">
+                                        <input  type="number" name="text-input" class="form-control"
+                                                placeholder="Nhập số phút ..." formControlName="timeDiffrenceStartBreaktime" (ngModelChange)="changeDiffrenceStartBreaktime()"
+                                                [class.is-invalid]="updateTimesheet.controls.timeDiffrenceStartBreaktime.invalid && (updateTimesheet.controls.timeDiffrenceStartBreaktime.dirty || updateTimesheet.controls.timeDiffrenceStartBreaktime.touched)">
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDiffrenceStartBreaktime.errors?.required">*Không được để trống</span>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDiffrenceStartBreaktime.errors?.min">*Phải lớn hơn 0</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>
+                                        <span *ngIf="updateTimesheet.value.timeDiffrenceStartBreaktime === 0"
+                                              class="badge badge-success">
+                                            Đúng giờ
+                                        </span>
+                                            <span *ngIf="updateTimesheet.value.timeDiffrenceStartBreaktime > 0"
+                                                  class="badge badge-danger">
+                                            Sai giờ
+                                        </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-3 col-form-label" for="text-input">Vào sau giải lao: </h3>
+                                <div class="col-md-9 row">
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Thời gian: </h3>
+                                    <div class="col-md-3">
+                                        <p-calendar [style]="{'width':'100%'}"
+                                                    [inputStyle]="{'width':'100%'}"
+                                                    placeholder="Chọn thời gian ..." [locale]="vn"
+                                                    [timeOnly]="true"
+                                                    formControlName="verifyTimeEndBreaktime"
+                                                    [class.is-invalid]="updateTimesheet.controls.verifyTimeEndBreaktime.invalid && (updateTimesheet.controls.verifyTimeEndBreaktime.dirty || updateTimesheet.controls.verifyTimeEndBreaktime.touched)">
+                                        </p-calendar>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.verifyTimeEndBreaktime.errors?.required">*Không được để trống</span>
+                                    </div>
+                                    <h3 class="col-md-2 col-form-label" for="text-input">Muộn (phút): </h3>
+                                    <div class="col-md-3">
+                                        <input type="number" name="text-input" class="form-control"
+                                               placeholder="Nhập số phút ..." formControlName="timeDiffrenceEndBreaktime" (ngModelChange)="changeDiffrenceEndBreaktime()"
+                                               [class.is-invalid]="updateTimesheet.controls.timeDiffrenceEndBreaktime.invalid && (updateTimesheet.controls.timeDiffrenceEndBreaktime.dirty || updateTimesheet.controls.timeDiffrenceEndBreaktime.touched)">
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDiffrenceEndBreaktime.errors?.required">*Không được để trống</span>
+                                        <span class="invalid-feedback"
+                                              *ngIf="updateTimesheet.controls.timeDiffrenceEndBreaktime.errors?.min">*Phải lớn hơn 0</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>
+                                        <span *ngIf="updateTimesheet.value.timeDiffrenceEndBreaktime === 0"
+                                              class="badge badge-success">
+                                            Đúng giờ
+                                        </span>
+                                            <span *ngIf="updateTimesheet.value.timeDiffrenceEndBreaktime > 0"
+                                                  class="badge badge-danger">
+                                            Sai giờ
+                                        </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn btn-danger">
+                                <i class="fa fa-ban"></i> Đặt lại
+                            </button>
+                            <button type="submit" class="btn btn-success" (click)="update()">
+                                <i class="fa fa-dot-circle-o"></i> Lưu lại
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" [routerLink]="['/timesheet', 'list']" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Quay lại</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

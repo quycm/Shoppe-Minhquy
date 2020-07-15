@@ -1,0 +1,59 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <i class="fa fa-align-justify"></i>
+                    <h5 class="card-header-text d-inline-block">Danh sách dữ liệu thô</h5>
+                </div>
+                <div class="col-md-6">
+                    <div class="pr-lg-4 text-center text-md-right">
+                        <button mat-raised-button class=" btn btn-dark btn-sm" [routerLink]="['/raw-data', 'new']">Thêm mới dữ liệu thô</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-responsive-lg text-center" matSort>
+                <thead class="full-width">
+                <tr>
+                    <th>STT</th>
+                    <th>ID chấm công nhân viên </th>
+                    <th>Thời gian chấm công</th>
+                    <th>Loại chấm công</th>
+                    <th>Trạng thái</th>
+                    <th>Ca chấm công</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="sortedData?.length <1">
+                    <th colspan="6" rowspan="1" class="text-center bg-light text-dark" >
+                        <h3>Danh sách ca làm việc trống</h3>
+                    </th>
+                </tbody>
+                <tbody *ngFor="let item of sortedData; let i = index">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item?.userTkId}}</td>
+                    <td>{{item?.verifyTime| date: 'dd/MM/yyyy HH:mm'}}</td>
+                    <td *ngIf="item?.verifyType=='0'">Mã PIN</td>
+                    <td *ngIf="item?.verifyType=='1'">Khuôn mặt</td>
+                    <td *ngIf="item?.verifyType=='2'">Vân tay</td>
+                    <td *ngIf="item?.verifyType=='3'">Thẻ</td>
+                    <td *ngIf="item?.verifyType=== null">Chưa có</td>
+                    <td *ngIf="item?.verifyState== '1'">Vào</td>
+                    <td *ngIf="item?.verifyState== '0'">Ra</td>
+                    <td *ngIf="item?.verifyState== null">Chưa có</td>
+                    <td>
+                        <a target="_blank"
+                           [routerLink]="['/shift', item.shiftsid, 'detail']">{{item?.shiftResponseDTO?.name}} ({{item?.shiftResponseDTO?.startTime| date:'HH:mm'}} => {{item?.shiftResponseDTO?.endTime| date:'HH:mm'}})
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <mat-paginator [length]="totalRecords" (page)="handlePagination($event)" [pageSizeOptions]="pageSizeOptions"
+                           showFirstLastButtons [pageIndex]="pageIndex" [pageSize]="pageSize"></mat-paginator>
+        </div>
+    </div>
+</div>
+

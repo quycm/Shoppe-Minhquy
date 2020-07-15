@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Chỉnh sửa ưu đãi giờ làm (ID: {{bonus.id}})</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="../../core/image/bonus-time.jpg" width="100%"/>
+                    </div>
+                    <div class="col-md-9">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal"
+                              [formGroup]="updateBonus">
+                            <div class="form-group row">
+                                <h3 class="col-md-4 col-form-label" for="text-input">Tên ưu đãi:</h3>
+                                <div class="col-md-8">
+                                    <input type="text" name="text-input" class="form-control" placeholder="Nhập tên ưu đãi..." formControlName="name"
+                                           [class.is-invalid]="updateBonus.controls.name.invalid && (updateBonus.controls.name.dirty || updateBonus.controls.name.touched)">
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateBonus.controls.name.errors?.required"> *Tên ưu đãi không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="updateBonus.controls.name.errors?.pattern"> *Tên ưu đãi không thể quá dài</span>
+                                    <span class="invalid-feedback" *ngIf="updateBonus.controls.name.errors?.exists"> *Ưu đãi này đã được tạo</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-4 col-form-label" for="text-input">Thời gian cho phép đi muộn (phút):</h3>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" placeholder="Nhập số phút..." formControlName="inShift"
+                                           [class.is-invalid]="updateBonus.controls.inShift.invalid && (updateBonus.controls.inShift.dirty || updateBonus.controls.inShift.touched)">
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateBonus.controls.inShift.errors?.required"> *Số phút không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="updateBonus.controls.inShift.errors?.min"> *Số phút phải lớn hơn hoặc bằng 0</span>
+                                    <span class="invalid-feedback" *ngIf="updateBonus.controls.inShift.errors?.max"> *Số phút không thể quá lớn</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-4 col-form-label" for="text-input">Thời gian cho phép về sớm (phút):</h3>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" placeholder="Nhập số phút..." formControlName="outShift"
+                                           [class.is-invalid]="updateBonus.controls.outShift.invalid && (updateBonus.controls.outShift.dirty || updateBonus.controls.outShift.touched)">
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateBonus.controls.outShift.errors?.required"> *Số phút không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="updateBonus.controls.outShift.errors?.min"> *Số phút phải lớn hơn hoặc bằng 0</span>
+                                    <span class="invalid-feedback" *ngIf="updateBonus.controls.outShift.errors?.max"> *Số phút không thể quá lớn</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <h3 class="col-md-4 col-form-label" for="text-input">Ghi chú thêm: </h3>
+                                <div class="col-md-8">
+                                    <textarea rows="8" class="form-control" placeholder="Nhập ghi chú ..." formControlName="note"
+                                              [class.is-invalid]="updateBonus.controls.note.invalid && (updateBonus.controls.note.dirty || updateBonus.controls.note.touched)"
+                                    ></textarea>
+                                    <span class="invalid-feedback"
+                                          *ngIf="updateBonus.controls.note.errors?.required"> *Ghi chú không được để trống</span>
+                                    <span class="invalid-feedback" *ngIf="updateBonus.controls.note.errors?.pattern"> *Ghi chú không thể quá dài</span>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn btn-danger">
+                                <i class="fa fa-ban"></i> Đặt lại
+                            </button>
+                            <button type="submit" class="btn btn-success" (click)="update()">
+                                <i class="fa fa-dot-circle-o"></i> Chỉnh sửa
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" [routerLink]="['/bonus', 'list']" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Quay lại</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

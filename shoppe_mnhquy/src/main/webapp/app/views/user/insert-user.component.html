@@ -1,0 +1,170 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card">
+    <div class="card-header">Tạo tài khoản</div>
+    <div class="card-body">
+        <form class="needs-validation form-horizontal" [formGroup]="createUser">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên đăng nhập*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.login.invalid && (createUser.controls.login.dirty || createUser.controls.login.touched)"  formControlName="login" placeholder="Tên đăng nhập"
+                                               type="text">
+
+                                               <span class="invalid-feedback"
+                                               *ngIf="createUser.controls.login.errors?.required"> *Tên không được để trống</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Mật khẩu*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.password.invalid && (createUser.controls.password.dirty || createUser.controls.password.touched)"  formControlName="password"
+                                               placeholder="Mật khẩu" type="password" >
+                                               <span class="invalid-feedback"
+                                               *ngIf="createUser.controls.password.errors?.required && createUser.hasError('required', 'password')"> *Mật khẩu không được để trống</span>
+                                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Xác nhận mật khẩu*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" placeholder="Xác nhận mật khẩu"
+                                               formControlName="confirmPassword" [class.is-invalid]="createUser.controls.confirmPassword.invalid && (createUser.controls.confirmPassword.dirty || createUser.controls.confirmPassword.touched)"  type="password">
+
+                                               <span class="invalid-feedback"
+                                               *ngIf="createUser.controls.confirmPassword.errors?.required"> *Mật khẩu không được để trống</span>
+                                               <span class="invalid-feedback"
+                                               *ngIf="createUser.hasError('notSame')"> *Mật khẩu không khớp</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Tên*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.firstName.invalid && (createUser.controls.firstName.dirty || createUser.controls.firstName.touched)"  formControlName="firstName"
+                                               placeholder="Nhập Tên" type="text">
+                                               <span class="invalid-feedback"
+                                               *ngIf="createUser.controls.firstName.errors?.required"> *Tên không được để trống</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Họ*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.lastName.invalid && (createUser.controls.lastName.dirty || createUser.controls.lastName.touched)"  formControlName="lastName"
+                                               placeholder="Họ" type="text">
+                                               <span class="invalid-feedback"
+                                               *ngIf="createUser.controls.lastName.errors?.required"> *Họ không được để trống</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Email*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" [class.is-invalid]="createUser.controls.email.invalid && (createUser.controls.email.dirty || createUser.controls.email.touched)"  formControlName="email"
+                                               placeholder="email@localhost.com"
+                                               type="email">
+                                               <span class="invalid-feedback"
+                                               *ngIf="createUser.controls.email.errors?.required"> *Email không được để trống</span>
+                                        <span class="invalid-feedback"
+                                               *ngIf="createUser.controls.email.errors?.pattern"> *Email sai định dạng</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Công ty*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <ng-select formControlName="companyid" [items]="listCompany | async" bindValue="id" bindLabel="name"
+                                                   [addTag]="false"
+                                                   [multiple]="false" [hideSelected]="true"
+                                                   [loading]="companySearchLoading" [typeahead]="companySearchTxt"
+                                                   placeholder="--- Chọn công ty ---"
+                                                   [class.is-invalid]="createUser.controls.companyid.invalid && (createUser.controls.companyid.dirty || createUser.controls.companyid.touched)">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>ROLE*:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group-prepend">
+                                            <div class="col-3 input-group-text">
+                                                <p-checkbox name="authorities" value="ROLE_USER"
+                                                            [formControl]="createUser.controls['authorities']"
+                                                            label="ROLE_USER"></p-checkbox>
+
+                                            </div>
+                                            <div class="col-md-1"></div>
+
+                                            <div class="col-3 input-group-text">
+                                                <p-checkbox name="authorities" value="ROLE_ADMIN"
+                                                            [formControl]="createUser.controls['authorities']"
+                                                            label="ROLE_ADMIN"></p-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </form>
+        <hr>
+
+        <button type="submit" class="btn btn-success" (click)="create()">
+            <i class="fa fa-dot-circle-o"></i> Thêm mới
+        </button>
+
+    </div>
+</div>
